@@ -137,11 +137,16 @@ int	main(void)
 	mlx_data.img.addr = mlx_get_data_addr(mlx_data.img.img, &mlx_data.img.bpp, &mlx_data.img.line_len, &mlx_data.img.endian);
 	mlx_data.xm = 0;
 	mlx_data.ym = 0;
-	//mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, mlx_data.img.img, 0, 0);
-	mlx_hook(mlx_data.win, 6, (1L << 6), mouse, &mlx_data);
+	
+
+	my_mlx_pixel_put(&mlx_data.img, 5, 10, 0x0000FF00);
+
+	mlx_put_image_to_window(mlx_data.mlx, mlx_data.win, mlx_data.img.img, 0, 0);
+
+	//mlx_hook(mlx_data.win, 6, (1L << 6), mouse, &mlx_data);
 
 	write(1, "aSDASD", 6);
 	
-	mlx_loop_hook(mlx_data.mlx, update, &mlx_data);
+	//mlx_loop_hook(mlx_data.mlx, update, &mlx_data);
 	mlx_loop(mlx_data.mlx);
 }
