@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:25:47 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 11:15:06 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/16 18:32:13 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,25 @@ typedef struct	s_vector3 {
 	int	z;
 }	t_vector3;
 
+typedef struct	s_rgb_color {
+	int	r;
+	int	g;
+	int	b;
+}	t_rgb_color;
+
 typedef struct	s_map {
-	char	*name;
-	char	**lines;
-	int		x_max;
-	int		y_max;
-	int		**p;
+	char		*name;
+	char		**lines;
+	int			x_max;
+	int			y_max;
+	t_vector3	**pts;
+	t_rgb_color	**clr;
+	int			custom_clr;
+	t_rgb_color	clr_bottom;
+	t_rgb_color	clr_top;
+	int			z_min;
+	int			z_max;
+	float		z_scale;
 }	t_map;
 
 typedef struct	s_env {
@@ -61,12 +74,6 @@ typedef struct	s_env {
 	t_vector2	mouse_pos;
 	t_map		map;
 }	t_env;
-
-typedef struct	s_rgb_color {
-	int	r;
-	int	g;
-	int	b;
-}	t_rgb_color;
 
 typedef struct	s_line_AA {
 	int			steep;
@@ -90,20 +97,29 @@ typedef struct	s_line {
 }	t_line;
 
 
+int	get_nb_lines(char *file);
+int	file_ext(char *f);
+int	check_file(t_env *e);
+int	get_lines(t_env *e);
 
 int			get_mouse_pos(int x, int y, t_env *e);
 
-void		draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env e);
-void		draw_line_AA(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env e);
+void		draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env *e);
+void		draw_line_AA(t_vector3 p1, t_vector3 p2, t_rgb_color c1,
+	t_rgb_color c2, t_env *e);
 
 void		set_bg(t_env *e, t_rgb_color clr);
 void		put_pxl_AA(t_img *img, t_vector3 p, t_rgb_color clr, float bright);
 void		put_pxl(t_img *img, t_vector3 p, t_rgb_color clr);
 
+t_rgb_color lerp_clr(t_rgb_color clr1, t_rgb_color clr2, float t);
 t_rgb_color rgb(int r, int g, int b);
-int			mix_color(t_rgb_color clr, float bright, int back_clr);
+t_rgb_color char_to_rgb(char *clr);
 t_rgb_color	rgb_from_int(int clr);
+t_rgb_color clr_from_z(int z, t_env *e);
+int			mix_color(t_rgb_color clr, float bright, int back_clr);
 int 		int_from_rgb(t_rgb_color clr);
+int			hex_val(char c);
 
 int			min(int a, int b);
 void		swap(int *a, int *b);
@@ -114,6 +130,19 @@ t_vector3	rotateX(t_vector3 p, int angle);
 t_vector3	rotateY(t_vector3 p, int angle);
 t_vector3	rotateZ(t_vector3 p, int angle);
 
-t_vector3	center(t_vector3 p);
+t_vector3	scale_height(t_vector3 p, float s);
+t_vector3	scale(t_vector3 p, float s);
+t_vector3	center(t_vector3 p, t_env *e);
+t_vector3	center_in_view(t_vector3 p);
+t_vector3	transform(t_vector3 p, t_env *e);
 
+int			init_mlx(t_env *e);
+int			update(t_env *e);
+int			close_win(t_env *e);
+
+int			draw_map(t_env *e);
+
+int			count_pt(char **pts);
+void		save_pt_infos(int y, char ***pts, t_env *e);
+int			decode_lines(t_env *e);
 #endif

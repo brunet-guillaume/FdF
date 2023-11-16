@@ -6,7 +6,7 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 21:35:49 by gbrunet           #+#    #+#              #
-#    Updated: 2023/11/15 21:58:01 by gbrunet          ###   ########.fr        #
+#    Updated: 2023/11/16 18:33:01 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,9 +26,10 @@ OBJ_DIR = objects/
 
 SRC_FILES = fdf \
 		color_helper image_helper math_helper \
-		draw_line draw_line_AA \
+		draw_line draw_line_AA draw_map \
 		rotate translate \
-		hooks
+		hooks mlx \
+		file parser
 
 SRC = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILES)))
 

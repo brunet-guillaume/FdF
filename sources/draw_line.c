@@ -6,13 +6,13 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 21:23:15 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/15 21:31:24 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/16 14:04:45 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env e)
+void	draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env *e)
 {
 	t_line	l;
 
@@ -27,7 +27,7 @@ void	draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env e)
 	l.err =  l.dx + l.dy;
 	while (!(p2.x == p1.x && p2.y == p1.y))
 	{
-		put_pxl(&e.img, p1, clr);
+		put_pxl(&e->img, p1, clr);
 		l.err2 = 2 * l.err;
 		if (l.err2 >= l.dy)
 		{
