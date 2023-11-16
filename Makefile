@@ -38,15 +38,18 @@ $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-MLX = ./minilibx-linux/libmlx.a -lXext -lX11 -lm
+MLX = -lmlx -L ./minilibx-linux -lXext -lX11 -lm
 
 .PHONY : all clean fclean re run norme
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+lib :
 	make -C $(LIBFT)
-	$(CC) $(CFLAGS) -L./$(LIBFT)/ -lft $(OBJ) -o $(NAME) $(MLX)
+
+$(NAME) : lib $(OBJ)
+	#make -C $(LIBFT)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MLX) -lft -L ./libft
 
 clean :
 	make clean -C $(LIBFT)
