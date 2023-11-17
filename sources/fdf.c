@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:19:54 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 14:59:45 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:40:32 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,17 @@ int	get_map(t_env *e)
 	if (!get_lines(e))
 		return (0);
 	if (!decode_lines(e))
+	{
+		free(e->map.name);
+		y = 0;
+		while (y < e->map.y_max)
+		{
+			free(e->map.lines[y]);
+			y++;
+		}
+		free(e->map.lines);
 		return (0);
+	}
 	free(e->map.name);
 	y = 0;
 	while (y < e->map.y_max)

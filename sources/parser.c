@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 13:50:02 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:41:25 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,20 @@ int	decode_lines(t_env *e)
 			e->map.x_max = count_pt(pts);
 		if (e->map.x_max != count_pt(pts))
 		{
+			i = 0;
+			while (pts[i])
+			{
+				free(pts[i]);
+				i++;
+			}
+			free(pts);
+			while (--y >= 0)
+			{
+				free(e->map.pts[y]);
+				free(e->map.clr[y]);
+			}
+			free(e->map.pts);
+			free(e->map.clr);
 			ft_putstr_fd("Erreur. Map non conforme.\n", 2);
 			return (0);
 		}
