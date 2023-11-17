@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:18:18 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 12:21:41 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 15:05:29 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,21 @@ void	update_pan(t_env *e)
 
 int	close_win(t_env *e)
 {
+	int y;
+	
+	y = 0;
+	while (y < e->map.y_max)
+	{
+		free(e->map.pts[y]);
+		free(e->map.clr[y]);
+		y++;
+	}
+	free(e->map.pts);
+	free(e->map.clr);
 	mlx_destroy_window(e->mlx, e->win);
+	mlx_destroy_image(e->mlx, e->img.img);
+	mlx_destroy_display(e->mlx);
+	free(e->mlx);
 	exit(0);
 }
 

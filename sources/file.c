@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:28:20 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 18:28:34 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 12:34:54 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,10 @@ int	check_file(t_env *e)
 	}
 	e->map.y_max = 0;
 	while ((line = get_next_line(fd)))
+	{
+		free(line);
 		e->map.y_max++;
+	}
 	if (e->map.y_max == 0)
 	{
 		ft_putstr_fd("Erreur. Le fichier est vide.\n", 2);

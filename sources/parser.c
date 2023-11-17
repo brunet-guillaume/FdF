@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 11:01:09 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 13:50:02 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ int	decode_lines(t_env *e)
 {
 	char		**pts;
 	int			y;
+	int			i;
 
 	y = 0;
 	e->map.pts = malloc(e->map.y_max * sizeof(t_vector3 *));
@@ -89,6 +90,13 @@ int	decode_lines(t_env *e)
 			return (0);
 		save_pt_infos(y, &pts, e);
 		y++;
+		i = 0;
+		while (pts[i])
+		{
+			free(pts[i]);
+			i++;
+		}
+		free(pts);
 	}
 	return (1);
 }
