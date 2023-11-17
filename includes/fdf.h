@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:25:47 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 18:32:13 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 11:30:16 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,15 @@
 # ifndef WIN_HEIGHT
 #  define WIN_HEIGHT 1080
 # endif
+
+# define ESC_KEY 65307
+# define LEFT_CTRL_KEY 65507
+# define RIGHT_CTRL_KEY 65508
+# define LEFT_SHIFT_KEY 65505
+# define RIGHT_SHIFT_KEY 65506
+# define CAPS_LOCK_KEY 65509
+# define BACKSPACE_KEY 65288
+# define RETURN_KEY 65293
 
 typedef struct	s_img {
 	void	*img;
@@ -59,9 +68,6 @@ typedef struct	s_map {
 	int			y_max;
 	t_vector3	**pts;
 	t_rgb_color	**clr;
-	int			custom_clr;
-	t_rgb_color	clr_bottom;
-	t_rgb_color	clr_top;
 	int			z_min;
 	int			z_max;
 	float		z_scale;
@@ -71,8 +77,22 @@ typedef struct	s_env {
 	void		*mlx;
 	void		*win;
 	t_img		img;
+	t_vector2	mouse_pos_init;
 	t_vector2	mouse_pos;
+	t_vector2	rotation_init;
+	t_vector2	rotation;
+	t_vector2	pan_init;
+	t_vector2	pan;
+	float		zoom_init;
+	float		zoom;
 	t_map		map;
+	int			ctrl_down;
+	int			shift_down;
+	int			caps_lock_down;
+	int			custom_clr;
+	t_rgb_color	clr_bottom;
+	t_rgb_color	clr_top;
+	int			parallel;
 }	t_env;
 
 typedef struct	s_line_AA {
@@ -135,6 +155,7 @@ t_vector3	scale(t_vector3 p, float s);
 t_vector3	center(t_vector3 p, t_env *e);
 t_vector3	center_in_view(t_vector3 p);
 t_vector3	transform(t_vector3 p, t_env *e);
+t_vector3	parallel_tr(t_vector3 p, t_env *e);
 
 int			init_mlx(t_env *e);
 int			update(t_env *e);

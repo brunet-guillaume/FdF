@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 18:31:09 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 11:01:09 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void	save_pt_infos(int y, char ***pts, t_env *e)
 			clr = ft_strchr((*pts)[x], ',');
 			if (clr && ft_strlen(clr) == 9)
 			{
-				e->map.custom_clr = 1;
+				e->custom_clr = 1;
 				e->map.clr[y][x] = char_to_rgb(++clr);
 			}
 			else
-				e->map.clr[y][x] = e->map.clr_bottom;
+				e->map.clr[y][x] = rgb(256, 256, 256);
 			e->map.pts[y][x] = pt;
 			x++;
 		}

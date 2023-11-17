@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:58:48 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 14:59:55 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 11:03:38 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,10 @@ void	draw_line_AA(t_vector3 p1, t_vector3 p2, t_rgb_color c1,
 		swap(&p1.y, &p2.y);
 	}
 	line_AA_init(&l, p1, p2);
+	if (c1.r == 256)
+		c1 = e->clr_bottom;
+	if (c2.r == 256)
+		c2 = e->clr_bottom;
 	if(l.steep)
 		if_steep_draw(l, c1, c2, e);
 	else

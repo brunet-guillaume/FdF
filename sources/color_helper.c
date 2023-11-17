@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:04:33 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/16 18:26:09 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 10:13:01 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_rgb_color clr_from_z(int z, t_env *e)
 	t_rgb_color	clr;
 	float		coef;
 	coef = (z - e->map.z_min) / (float)(e->map.z_max - e->map.z_min);
-	clr = lerp_clr(e->map.clr_bottom, e->map.clr_top, coef);
+	clr = lerp_clr(e->clr_bottom, e->clr_top, coef);
 	return (clr);
 }
 
