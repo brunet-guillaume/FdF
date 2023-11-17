@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:25:47 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 11:30:16 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 18:20:12 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "../libft/libft.h"
 # include <math.h>
 # include <stdlib.h>
-# include <stdio.h> // a remplacer par ft_printf
 # include <fcntl.h>
 
 # ifndef WIN_WIDTH
@@ -95,7 +94,7 @@ typedef struct	s_env {
 	int			parallel;
 }	t_env;
 
-typedef struct	s_line_AA {
+typedef struct	s_line_aa {
 	int			steep;
 	float		dx;
 	float		dy;
@@ -105,7 +104,14 @@ typedef struct	s_line_AA {
 	float		intY;
 	int			x;
 	t_vector3	p;
-}	t_line_AA;
+}	t_line_aa;
+
+typedef struct	s_line_infos {
+	t_vector3	p1;
+	t_vector3	p2;
+	t_rgb_color	c1;
+	t_rgb_color	c2;
+}	t_line_infos;
 
 typedef struct	s_line {
 	int	dx;
@@ -116,6 +122,11 @@ typedef struct	s_line {
 	int	err2;
 }	t_line;
 
+t_vector3	scale_height(t_vector3 p, float s);
+t_vector3	scale(t_vector3 p, float s);
+
+int	win_error(void);
+int	arg_error(void);
 
 int	get_nb_lines(char *file);
 int	file_ext(char *f);
@@ -125,11 +136,10 @@ int	get_lines(t_env *e);
 int			get_mouse_pos(int x, int y, t_env *e);
 
 void		draw_line(t_vector3 p1, t_vector3 p2, t_rgb_color clr, t_env *e);
-void		draw_line_AA(t_vector3 p1, t_vector3 p2, t_rgb_color c1,
-	t_rgb_color c2, t_env *e);
+void		draw_line_aa(t_line_infos line, t_env *e);
 
 void		set_bg(t_env *e, t_rgb_color clr);
-void		put_pxl_AA(t_img *img, t_vector3 p, t_rgb_color clr, float bright);
+void		put_pxl_aa(t_img *img, t_vector3 p, t_rgb_color clr, float bright);
 void		put_pxl(t_img *img, t_vector3 p, t_rgb_color clr);
 
 t_rgb_color lerp_clr(t_rgb_color clr1, t_rgb_color clr2, float t);
@@ -141,14 +151,26 @@ int			mix_color(t_rgb_color clr, float bright, int back_clr);
 int 		int_from_rgb(t_rgb_color clr);
 int			hex_val(char c);
 
+void	draw_clr(t_vector2 pt, t_rgb_color clr, t_env *e);
+void	draw_clrs(t_env *e);
+
 int			min(int a, int b);
 void		swap(int *a, int *b);
-float		fPartOfNb(float x);
-float		rfPartOfNb(float x);
+float		fpartofnb(float x);
+float		rfpartofnb(float x);
 
-t_vector3	rotateX(t_vector3 p, int angle);
-t_vector3	rotateY(t_vector3 p, int angle);
-t_vector3	rotateZ(t_vector3 p, int angle);
+void	update_zoom(t_env *e);
+void	update_rotation(t_env *e);
+void	update_pan(t_env *e);
+
+double	d_max(double a, double b);
+double	d_min(double a, double b);
+
+int	file_error(void);
+int	read_error(void);
+t_vector3	rotate_x(t_vector3 p, int angle);
+t_vector3	rotate_y(t_vector3 p, int angle);
+t_vector3	rotate_z(t_vector3 p, int angle);
 
 t_vector3	scale_height(t_vector3 p, float s);
 t_vector3	scale(t_vector3 p, float s);
@@ -161,9 +183,19 @@ int			init_mlx(t_env *e);
 int			update(t_env *e);
 int			close_win(t_env *e);
 
+void	draw_parallel(t_env *e);
 int			draw_map(t_env *e);
 
+void	draw_clrs(t_env *e);
+void	check_click(int x, int y, t_env *e);
+t_vector2	vector2(int x, int y);
+int	toggle(int i);
 int			count_pt(char **pts);
 void		save_pt_infos(int y, char ***pts, t_env *e);
 int			decode_lines(t_env *e);
+void	reset_view(t_env *e);
+int	press_key(int keycode, t_env *e);
+int	up_key(int keycode, t_env *e);
+void	change_z_scale(int coef, t_env *e);
+int	mouse_hook(int btn, int x, int y, t_env *e);
 #endif

@@ -6,7 +6,7 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 21:35:49 by gbrunet           #+#    #+#              #
-#    Updated: 2023/11/16 18:33:01 by gbrunet          ###   ########.fr        #
+#    Updated: 2023/11/17 17:55:56 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,11 @@ SRC_DIR = sources/
 
 OBJ_DIR = objects/
 
-SRC_FILES = fdf \
-		color_helper image_helper math_helper \
-		draw_line draw_line_AA draw_map \
-		rotate translate \
+SRC_FILES = fdf errors ui interactions \
+		color_helper color_converter image_helper \
+		math_helper math_helper_2 \
+		draw_line draw_line_AA draw_map draw_parallel \
+		rotate translate scale \
 		hooks mlx \
 		file parser
 

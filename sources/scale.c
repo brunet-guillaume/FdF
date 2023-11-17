@@ -1,48 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper.c                                      :+:      :+:    :+:   */
+/*   scale.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:57:50 by gbrunet          ###   ########.fr       */
+/*   Created: 2023/11/17 17:48:16 by gbrunet           #+#    #+#             */
+/*   Updated: 2023/11/17 17:50:48 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	min(int a, int b)
+t_vector3	scale_height(t_vector3 p, float s)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	t_vector3	scaled;
+
+	scaled.x = p.x;
+	scaled.y = p.y;
+	scaled.z = p.z * s;
+	return (scaled);
 }
 
-void	swap(int *a, int *b)
+t_vector3	scale(t_vector3 p, float s)
 {
-	int	temp;
+	t_vector3	scaled;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-float	fpartofnb(float x)
-{
-	if (x > 0)
-		return (x - (int)x);
-	return (x - ((int)x + 1));
-}
-
-float	rfpartofnb(float x)
-{
-	return (1 - fpartofnb(x));
-}
-
-int	toggle(int i)
-{
-	if (i == 1)
-		return (0);
-	return (1);
+	scaled.x = p.x * s;
+	scaled.y = p.y * s;
+	scaled.z = p.z * s;
+	return (scaled);
 }

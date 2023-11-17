@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:34:55 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/15 19:55:13 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 16:24:10 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ float	deg2rad(int angle)
 	return (angle * M_PI / 180);
 }
 
-t_vector3	rotateX(t_vector3 p, int angle)
+t_vector3	rotate_x(t_vector3 p, int angle)
 {
 	t_vector3	rotated;
 	float		rad;
@@ -29,7 +29,7 @@ t_vector3	rotateX(t_vector3 p, int angle)
 	return (rotated);
 }
 
-t_vector3	rotateY(t_vector3 p, int angle)
+t_vector3	rotate_y(t_vector3 p, int angle)
 {
 	t_vector3	rotated;
 	float		rad;
@@ -41,7 +41,7 @@ t_vector3	rotateY(t_vector3 p, int angle)
 	return (rotated);
 }
 
-t_vector3	rotateZ(t_vector3 p, int angle)
+t_vector3	rotate_z(t_vector3 p, int angle)
 {
 	t_vector3	rotated;
 	float		rad;

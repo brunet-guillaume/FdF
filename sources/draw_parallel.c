@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_parallel.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/16 18:22:16 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:30:33 by gbrunet          ###   ########.fr       */
+/*   Created: 2023/11/17 17:27:59 by gbrunet           #+#    #+#             */
+/*   Updated: 2023/11/17 17:30:08 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-void	draw_map_x(int x, int y, t_line_infos line, t_env *e)
+void	draw_parallel_x(int x, int y, t_line_infos line, t_env *e)
 {
-	line.p2 = transform(e->map.pts[y][x + 1], e);
+	line.p2 = parallel_tr(e->map.pts[y][x + 1], e);
 	if (e->custom_clr)
 	{
 		line.c2 = e->map.clr[y][x + 1];
@@ -28,9 +28,9 @@ void	draw_map_x(int x, int y, t_line_infos line, t_env *e)
 	}
 }
 
-void	draw_map_y(int x, int y, t_line_infos line, t_env *e)
+void	draw_parallel_y(int x, int y, t_line_infos line, t_env *e)
 {
-	line.p2 = transform(e->map.pts[y + 1][x], e);
+	line.p2 = parallel_tr(e->map.pts[y + 1][x], e);
 	if (e->custom_clr)
 	{
 		line.c2 = e->map.clr[y + 1][x];
@@ -44,7 +44,7 @@ void	draw_map_y(int x, int y, t_line_infos line, t_env *e)
 	}
 }
 
-void	draw_ortho(t_env *e)
+void	draw_parallel(t_env *e)
 {
 	int				x;
 	int				y;
@@ -56,24 +56,14 @@ void	draw_ortho(t_env *e)
 		x = 0;
 		while (x < e->map.x_max)
 		{
-			line.p1 = transform(e->map.pts[y][x], e);
+			line.p1 = parallel_tr(e->map.pts[y][x], e);
 			line.c1 = e->map.clr[y][x];
 			if (x + 1 < e->map.x_max)
-				draw_map_x(x, y, line, e);
+				draw_parallel_x(x, y, line, e);
 			if (y + 1 < e->map.y_max)
-				draw_map_y(x, y, line, e);
+				draw_parallel_y(x, y, line, e);
 			x++;
 		}
 		y++;
 	}
-}
-
-int	draw_map(t_env *e)
-{
-	set_bg(e, rgb(70, 70, 70));
-	if (e->parallel)
-		draw_parallel(e);
-	else
-		draw_ortho(e);
-	return (1);
 }

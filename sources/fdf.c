@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:19:54 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 15:40:32 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/17 16:00:45 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,10 @@
 
 #include <stdio.h>
 
-int	get_map(t_env *e)
+void	free_lines(t_env *e)
 {
-	int y;
+	int	y;
 
-	if (!check_file(e))
-		return (0);
-	if (!get_lines(e))
-		return (0);
-	if (!decode_lines(e))
-	{
-		free(e->map.name);
-		y = 0;
-		while (y < e->map.y_max)
-		{
-			free(e->map.lines[y]);
-			y++;
-		}
-		free(e->map.lines);
-		return (0);
-	}
 	free(e->map.name);
 	y = 0;
 	while (y < e->map.y_max)
@@ -42,40 +26,47 @@ int	get_map(t_env *e)
 		y++;
 	}
 	free(e->map.lines);
+}
+
+int	get_map(t_env *e)
+{
+	if (!check_file(e))
+		return (0);
+	if (!get_lines(e))
+		return (0);
+	if (!decode_lines(e))
+	{
+		free_lines(e);
+		return (0);
+	}
+	free_lines(e);
 	return (1);
+}
+
+void	init_env(char *name, t_env *e)
+{
+	e->map.name = name;
+	e->custom_clr = 0;
+	e->clr_bottom = rgb(255, 0, 0);
+	e->clr_top = rgb(128, 255, 0);
+	e->parallel = 0;
+	e->map.z_min = 0;
+	e->map.z_max = 0;
+	e->map.z_scale = 1;
 }
 
 int	main(int ac, char **av)
 {
 	t_env	env;
-	
-	if (WIN_WIDTH < 800 || WIN_HEIGHT < 800 ||
-		WIN_WIDTH > 2000 || WIN_HEIGHT > 2000)
-	{
-		ft_putstr_fd("Erreur. Taille de la fenetre non conforme.\n", 2);
-		ft_putstr_fd("Hauteur et largeur doivent etre entre", 2);
-		ft_putstr_fd(" 800 et 2000px.\n", 2);
-		return (0);
-	}
+
+	if (WIN_WIDTH < 800 || WIN_HEIGHT < 800
+		|| WIN_WIDTH > 2000 || WIN_HEIGHT > 2000)
+		return (win_error());
 	if (ac != 2)
-	{
-		ft_putstr_fd("Erreur. Veuillez donner une seule map au format .fdf", 2);
-		ft_putstr_fd(" en argument de ce programme\n", 2);
-		return (0);
-	}
-	env.map.name = ft_strtrim(av[1], " \f\n\r\t\v");
-	env.custom_clr = 0;
-	env.clr_bottom = rgb(255, 0, 0);
-	env.clr_top = rgb(128, 255, 0);
-	env.parallel = 0;
-	env.map.z_min = 0;
-	env.map.z_max = 0;
-	env.map.z_scale = 1;
+		return (arg_error());
+	init_env(ft_strtrim(av[1], " \f\n\r\t\v"), &env);
 	if (!get_map(&env))
 		return (0);
 	if (!init_mlx(&env))
 		return (0);
-	
-
-
 }
