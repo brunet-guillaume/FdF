@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:58:48 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:13:08 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/20 08:40:26 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	if_steep_draw(t_line_aa l, t_line_infos line, t_env *e)
 	while (l.x <= l.xpx2)
 	{
 		coef = 1 - (l.xpx2 - l.x) / (float)gap;
-		l.p.x = (int)l.intY;
+		l.p.x = (int)l.int_y;
 		l.p.y = l.x;
 		put_pxl_aa(&e->img, l.p, lerp_clr(line.c1, line.c2, coef),
-			fpartofnb(l.intY));
-		l.p.x = (int)l.intY - 1;
+			fpartofnb(l.int_y));
+		l.p.x = (int)l.int_y - 1;
 		put_pxl_aa(&e->img, l.p, lerp_clr(line.c1, line.c2, coef),
-			rfpartofnb(l.intY));
-		l.intY += l.gradient;
+			rfpartofnb(l.int_y));
+		l.int_y += l.gradient;
 		l.x++;
 	}
 }
@@ -45,13 +45,13 @@ void	if_not_steep_draw(t_line_aa l, t_line_infos line, t_env *e)
 	{
 		coef = 1 - (l.xpx2 - l.x) / (float)gap;
 		l.p.x = l.x;
-		l.p.y = (int)l.intY;
+		l.p.y = (int)l.int_y;
 		put_pxl_aa(&e->img, l.p, lerp_clr(line.c1, line.c2, coef),
-			fpartofnb(l.intY));
-		l.p.y = (int)l.intY - 1;
+			fpartofnb(l.int_y));
+		l.p.y = (int)l.int_y - 1;
 		put_pxl_aa(&e->img, l.p, lerp_clr(line.c1, line.c2, coef),
-			rfpartofnb(l.intY));
-		l.intY += l.gradient;
+			rfpartofnb(l.int_y));
+		l.int_y += l.gradient;
 		l.x++;
 	}
 }
@@ -65,7 +65,7 @@ void	line_aa_init(t_line_aa *l, t_line_infos line)
 		l->gradient = 1;
 	l->xpx1 = line.p1.x;
 	l->xpx2 = line.p2.x;
-	l->intY = line.p1.y;
+	l->int_y = line.p1.y;
 	l->x = l->xpx1;
 }
 

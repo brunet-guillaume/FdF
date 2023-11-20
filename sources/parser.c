@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 15:41:25 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/20 08:37:12 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,36 @@ int	count_pt(char **pts)
 	return (count);
 }
 
-void	save_pt_infos(int y, char ***pts, t_env *e)
+void	set_color(int x, int y, char *color, t_env *e)
+{
+	char	*clr;
+
+	clr = ft_strchr(color, ',');
+	if (clr && ft_strlen(clr) == 9)
+	{
+		e->custom_clr = 1;
+		e->map.clr[y][x] = char_to_rgb(++clr);
+	}
+	else
+		e->map.clr[y][x] = rgb(256, 256, 256);
+}
+
+void	save_pt_infos(int y, char **pts, t_env *e)
 {
 	int			x;
 	int			i;
 	t_vector3	pt;
-	char		*clr;
 
 	x = 0;
 	i = 0;
-	while ((*pts)[i])
+	while ((pts)[i])
 	{
-		if (ft_strlen((*pts)[x]) > 0 && ft_isdigit((*pts)[x][0]))
+		if (ft_strlen((pts)[x]) > 0 && ft_isdigit((pts)[x][0]))
 		{
-			pt.x = x * 10;
-			pt.y = y * 10;
-			pt.z = ft_atoi((*pts)[x]);
+			pt = vector3(x * 10, y * 10, ft_atoi((pts)[x]));
 			e->map.z_min = min(e->map.z_min, pt.z);
 			e->map.z_max = max(e->map.z_max, pt.z);
-			clr = ft_strchr((*pts)[x], ',');
-			if (clr && ft_strlen(clr) == 9)
-			{
-				e->custom_clr = 1;
-				e->map.clr[y][x] = char_to_rgb(++clr);
-			}
-			else
-				e->map.clr[y][x] = rgb(256, 256, 256);
+			set_color(x, y, (pts)[x], e);
 			e->map.pts[y][x] = pt;
 			x++;
 		}
@@ -61,11 +65,35 @@ void	save_pt_infos(int y, char ***pts, t_env *e)
 	}
 }
 
-int	decode_lines(t_env *e)
+int	line_decoder(int *y, t_env *e)
 {
 	char		**pts;
-	int			y;
 	int			i;
+
+	pts = ft_split(e->map.lines[*y], ' ');
+	if (*y == 0)
+		e->map.x_max = count_pt(pts);
+	if (e->map.x_max != count_pt(pts))
+		return (map_error(pts, *y, e));
+	e->map.pts[*y] = malloc(e->map.x_max * sizeof(t_vector3));
+	e->map.clr[*y] = malloc(e->map.x_max * sizeof(t_rgb_color));
+	if (!e->map.clr[*y] || !e->map.pts[*y])
+		return (0);
+	save_pt_infos(*y, pts, e);
+	(*y)++;
+	i = 0;
+	while (pts[i])
+	{
+		free(pts[i]);
+		i++;
+	}
+	free(pts);
+	return (1);
+}
+
+int	decode_lines(t_env *e)
+{
+	int			y;
 
 	y = 0;
 	e->map.pts = malloc(e->map.y_max * sizeof(t_vector3 *));
@@ -75,42 +103,7 @@ int	decode_lines(t_env *e)
 	if (!e->map.clr)
 		return (0);
 	while (y < e->map.y_max)
-	{
-		pts = ft_split(e->map.lines[y], ' ');
-		if (y == 0)
-			e->map.x_max = count_pt(pts);
-		if (e->map.x_max != count_pt(pts))
-		{
-			i = 0;
-			while (pts[i])
-			{
-				free(pts[i]);
-				i++;
-			}
-			free(pts);
-			while (--y >= 0)
-			{
-				free(e->map.pts[y]);
-				free(e->map.clr[y]);
-			}
-			free(e->map.pts);
-			free(e->map.clr);
-			ft_putstr_fd("Erreur. Map non conforme.\n", 2);
+		if (!line_decoder(&y, e))
 			return (0);
-		}
-		e->map.pts[y] = malloc(e->map.x_max * sizeof(t_vector3));
-		e->map.clr[y] = malloc(e->map.x_max * sizeof(t_rgb_color));
-		if (!e->map.clr[y] || !e->map.pts[y])
-			return (0);
-		save_pt_infos(y, &pts, e);
-		y++;
-		i = 0;
-		while (pts[i])
-		{
-			free(pts[i]);
-			i++;
-		}
-		free(pts);
-	}
 	return (1);
 }

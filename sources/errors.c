@@ -6,11 +6,33 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:00:51 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 18:19:59 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/20 08:37:28 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+int	map_error(char **pts, int y, t_env *e)
+{	
+	int	i;
+
+	i = 0;
+	while (pts[i])
+	{
+		free(pts[i]);
+		i++;
+	}
+	free(pts);
+	while (--y >= 0)
+	{
+		free(e->map.pts[y]);
+		free(e->map.clr[y]);
+	}
+	free(e->map.pts);
+	free(e->map.clr);
+	ft_putstr_fd("Erreur. Map non conforme.\n", 2);
+	return (0);
+}
 
 int	file_error(void)
 {

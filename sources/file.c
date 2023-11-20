@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:28:20 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 18:19:48 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/20 09:02:20 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int	get_lines(t_env *e)
 		e->map.lines[i] = get_next_line(fd);
 		i++;
 	}
+	get_next_line(fd);
 	close(fd);
 	return (1);
 }
