@@ -47,11 +47,6 @@ void	init_env(char *name, t_env *e)
 {
 	e->map.name = name;
 	e->custom_clr = 0;
-	e->clr_bottom = rgb(255, 0, 0);
-	e->clr_top = rgb(128, 255, 0);
-	e->parallel = 0;
-	e->map.z_min = 0;
-	e->map.z_max = 0;
 	e->map.z_scale = 1;
 }
 

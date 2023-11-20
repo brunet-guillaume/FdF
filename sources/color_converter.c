@@ -34,16 +34,6 @@ int	int_from_rgb(t_rgb_color clr)
 	return (r + g + b);
 }
 
-t_rgb_color	clr_from_z(int z, t_env *e)
-{
-	t_rgb_color	clr;
-	float		coef;
-
-	coef = (z - e->map.z_min) / (float)(e->map.z_max - e->map.z_min);
-	clr = lerp_clr(e->clr_bottom, e->clr_top, coef);
-	return (clr);
-}
-
 t_rgb_color	char_to_rgb(char *clr)
 {
 	t_rgb_color	rgb;

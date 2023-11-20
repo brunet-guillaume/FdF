@@ -39,7 +39,7 @@ void	set_color(int x, int y, char *color, t_env *e)
 		e->map.clr[y][x] = char_to_rgb(++clr);
 	}
 	else
-		e->map.clr[y][x] = rgb(256, 256, 256);
+		e->map.clr[y][x] = rgb(200, 100, 0);
 }
 
 void	save_pt_infos(int y, char **pts, t_env *e)
@@ -55,8 +55,6 @@ void	save_pt_infos(int y, char **pts, t_env *e)
 		if (ft_strlen((pts)[x]) > 0 && ft_isdigit((pts)[x][0]))
 		{
 			pt = vector3(x * 10, y * 10, ft_atoi((pts)[x]));
-			e->map.z_min = min(e->map.z_min, pt.z);
-			e->map.z_max = max(e->map.z_max, pt.z);
 			set_color(x, y, (pts)[x], e);
 			e->map.pts[y][x] = pt;
 			x++;
