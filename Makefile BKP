@@ -6,7 +6,7 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 21:35:49 by gbrunet           #+#    #+#              #
-#    Updated: 2023/12/02 08:06:21 by gbrunet          ###   ########.fr        #
+#    Updated: 2023/11/20 09:27:40 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,9 @@ NAME = fdf
 
 CC = cc
 
-CFLAGS = -Wall -Wextra -Werror -I$(X11)
+CFLAGS = -Wall -Wextra -Werror
 
 LIBFT = libft
-
-MINILIBX = minilibx-linux
-
-X11 = /usr/X11/include
-
-X11LIB = $(X11)/../lib
 
 INCLUDES = includes
 
@@ -65,7 +59,7 @@ $(OBJ_BONUS_DIR)%.o: $(BONUS_DIR)%.c
 	mkdir -p $(OBJ_BONUS_DIR)
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
-MLX = -lmlx -L $(MINILIBX) -lXext -lX11 -lm
+MLX = -lmlx -L ./minilibx -lXext -lX11 -lm
 
 .PHONY : all clean fclean re bonus norme
 
@@ -73,15 +67,12 @@ all : $(NAME)
 
 lib :
 	make -C $(LIBFT)
-	make -C $(MINILIBX)
-
 
 $(NAME) : lib $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(X11LIB) $(MLX) -lft -L ./libft
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(MLX) -lft -L ./libft
 
 clean :
 	make clean -C $(LIBFT)
-	make clean -C $(MINILIBX)
 	$(RM) -rf $(OBJ_DIR)
 
 fclean : clean
@@ -91,7 +82,7 @@ fclean : clean
 re : fclean all
 
 bonus : lib $(OBJ_B)
-	$(CC) $(CFLAGS) $(OBJ_B) -o $(NAME) $(MLX) -L $(X11LIB) -lft -L ./libft
+	$(CC) $(CFLAGS) $(OBJ_B) -o $(NAME) $(MLX) -lft -L ./libft
 
 norme :
 	@norminette $(SRC) $(LIBFT) $(SRC_B) | grep -v Norme -B1 || true
