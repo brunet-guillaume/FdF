@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_parallel.c                                    :+:      :+:    :+:   */
+/*   draw_parallel_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 17:27:59 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:30:08 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:36:05 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void	draw_parallel_x(int x, int y, t_line_infos line, t_env *e)
 	line.p2 = parallel_tr(e->map.pts[y][x + 1], e);
 	if (e->custom_clr)
 	{
-		line.c2 = e->map.clr[y][x + 1];
+		if (x + 2 < e->map.x_max)
+			line.c2 = e->map.clr[y][x + 1];
+		else
+			line.c2 = e->map.clr[y][x];
 		draw_line_aa(line, e);
 	}
 	else
@@ -33,7 +36,13 @@ void	draw_parallel_y(int x, int y, t_line_infos line, t_env *e)
 	line.p2 = parallel_tr(e->map.pts[y + 1][x], e);
 	if (e->custom_clr)
 	{
-		line.c2 = e->map.clr[y + 1][x];
+		if (x + 1 < e->map.x_max)
+			line.c2 = e->map.clr[y + 1][x];
+		else
+		{
+			line.c1 = e->map.clr[y][x - 1];
+			line.c2 = e->map.clr[y + 1][x - 1];
+		}
 		draw_line_aa(line, e);
 	}
 	else

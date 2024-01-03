@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 16:05:23 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 16:06:29 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:40:59 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,27 @@ int	int_from_rgb(t_rgb_color clr)
 
 t_rgb_color	char_to_rgb(char *clr)
 {
-	t_rgb_color	rgb;
+	t_rgb_color	rgb_clr;
 
-	rgb.r = hex_val(clr[2]) * 16 + hex_val(clr[3]);
-	rgb.g = hex_val(clr[4]) * 16 + hex_val(clr[5]);
-	rgb.b = hex_val(clr[6]) * 16 + hex_val(clr[7]);
-	return (rgb);
+	if (ft_strlen(clr) == 8)
+	{
+		rgb_clr.r = hex_val(clr[2]) * 16 + hex_val(clr[3]);
+		rgb_clr.g = hex_val(clr[4]) * 16 + hex_val(clr[5]);
+		rgb_clr.b = hex_val(clr[6]) * 16 + hex_val(clr[7]);
+	}
+	else if (ft_strlen(clr) == 6)
+	{
+		rgb_clr.r = 0;
+		rgb_clr.g = hex_val(clr[2]) * 16 + hex_val(clr[3]);
+		rgb_clr.b = hex_val(clr[4]) * 16 + hex_val(clr[5]);
+	}
+	else if (ft_strlen(clr) == 4)
+	{
+		rgb_clr.r = 0;
+		rgb_clr.g = 0;
+		rgb_clr.b = hex_val(clr[2]) * 16 + hex_val(clr[3]);
+	}
+	else
+		rgb_clr = rgb(256, 256, 256);
+	return (rgb_clr);
 }

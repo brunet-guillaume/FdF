@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/01/03 11:44:44 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 13:13:38 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_color(int x, int y, char *color, t_env *e)
 	char	*clr;
 
 	clr = ft_strchr(color, ',');
-	if (clr && ft_strlen(clr) == 9)
+	if (clr)
 	{
 		e->custom_clr = 1;
 		e->map.clr[y][x] = char_to_rgb(++clr);
