@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:57:26 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:48:10 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:44:27 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,11 @@ t_vector3	pan(t_vector3 p, t_env *e)
 t_vector3	transform(t_vector3 p, t_env *e)
 {
 	t_vector3	tp;
+	float		scl;
 
 	tp = center(p, e);
-	tp = scale(tp, 3);
+	scl = 100.0 / max(e->map.x_max, e->map.y_max);
+	tp = scale(tp, scl);
 	tp = rotate_z(tp, 45);
 	tp = rotate_x(tp, 45);
 	tp = center_in_view(tp);

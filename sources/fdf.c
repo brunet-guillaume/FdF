@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:19:54 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 16:00:45 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 10:13:50 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,15 @@ void	free_lines(t_env *e)
 int	get_map(t_env *e)
 {
 	if (!check_file(e))
+	{
+		free(e->map.name);
 		return (0);
+	}
 	if (!get_lines(e))
+	{
+		free(e->map.name);
 		return (0);
+	}
 	if (!decode_lines(e))
 	{
 		free_lines(e);

@@ -13,7 +13,7 @@
 #ifndef FDF_H
 # define FDF_H
 
-# include "../minilibx/mlx.h"
+# include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include "fdf_struct.h"
 # include <math.h>

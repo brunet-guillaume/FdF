@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx.c                                              :+:      :+:    :+:   */
+/*   mlx_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:18:18 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 18:10:54 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:39:29 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	init_mlx(t_env *e)
 	e->pan.x = 0;
 	e->pan.y = 0;
 	e->caps_lock_down = 0;
-	e->zoom = 3;
+	e->zoom = 100.0 / max(e->map.x_max, e->map.y_max);
 	mlx_hook(e->win, 17, (1L << 3), close_win, e);
 	mlx_hook(e->win, 6, (1L << 6), get_mouse_pos, e);
 	mlx_hook(e->win, 2, (1L << 0), press_key, e);

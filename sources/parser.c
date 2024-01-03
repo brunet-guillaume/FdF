@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 18:30:52 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/20 08:37:12 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/03 11:44:44 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	count_pt(char **pts)
 	count = 0;
 	while (pts[i])
 	{
-		if (ft_strlen(pts[i]) > 0 && ft_isdigit(pts[i][0]))
+		if (ft_strlen(pts[i]) > 0
+			&& (ft_isdigit(pts[i][0]) || pts[i][0] == '-'))
 			count++;
 		i++;
 	}
@@ -52,7 +53,8 @@ void	save_pt_infos(int y, char **pts, t_env *e)
 	i = 0;
 	while ((pts)[i])
 	{
-		if (ft_strlen((pts)[x]) > 0 && ft_isdigit((pts)[x][0]))
+		if (ft_strlen((pts)[x]) > 0
+				&& (ft_isdigit(pts[x][0]) || pts[x][0] == '-'))
 		{
 			pt = vector3(x * 10, y * 10, ft_atoi((pts)[x]));
 			set_color(x, y, (pts)[x], e);
