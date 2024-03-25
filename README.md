@@ -25,19 +25,22 @@ Here is an example of a map file :
 0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 ```
 Each number represents a point in space :
-1) The horizontal position corresponds to its axis
-2) The vertical position corresponds to its ordinate
-3) The value corresponds to its altitude
+<table>
+<tr><td>The horizontal position corresponds to its axis</td></tr>
+<tr><td>The vertical position corresponds to its ordinate</td></tr>
+<tr><td>The value corresponds to its altitude</td></tr>
+</table>
 
 ## Bonus part
 
 In the bonus part, we need to :
-1) Include one extra projection
-2) Add possibility to zoom in and out
-3) Add the possibility to translate the model
-4) Add the possibility to rotate the model
-5) Add one more bonus of our choice
-
+<table>
+<tr><td>Include one extra projection</td></tr>
+<tr><td>Add possibility to zoom in and out</td></tr>
+<tr><td>Add the possibility to translate the model</td></tr>
+<tr><td>Add the possibility to rotate the model</td></tr>
+<tr><td>Add one more bonus of our choice</td></tr>
+</table>
 
 ### Compilation
 ```bash
