@@ -6,7 +6,7 @@
 #    By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 21:35:49 by gbrunet           #+#    #+#              #
-#    Updated: 2024/03/25 11:52:44 by gbrunet          ###   ########.fr        #
+#    Updated: 2024/03/25 12:51:34 by gbrunet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -108,7 +108,7 @@ lib :
 
 
 $(NAME) : $(OBJ)
-	@make lib
+	@make lib --no-print-directory
 	@make info --no-print-directory
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -L $(X11LIB) $(MLX) -lft -L ./libft
 	@echo "$(_GREEN)$(NAME) created$(_END)"
