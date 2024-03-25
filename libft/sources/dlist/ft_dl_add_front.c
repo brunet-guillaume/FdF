@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper_bonus.c                                :+:      :+:    :+:   */
+/*   ft_dl_add_front.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/25 11:51:33 by gbrunet          ###   ########.fr       */
+/*   Created: 2023/11/09 09:35:49 by gbrunet           #+#    #+#             */
+/*   Updated: 2024/01/19 18:17:31 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void	swap(int *a, int *b)
+void	ft_dl_add_front(t_dlist **lst, t_dlist *new)
 {
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-float	fpartofnb(float x)
-{
-	if (x > 0)
-		return (x - (int)x);
-	return (x - ((int)x + 1));
-}
-
-float	rfpartofnb(float x)
-{
-	return (1 - fpartofnb(x));
-}
-
-int	toggle(int i)
-{
-	if (i == 1)
-		return (0);
-	return (1);
+	if (!lst || !new)
+		return ;
+	if (*lst)
+	{
+		new->next = *lst;
+		(*lst)->prev = new;
+	}
+	*lst = new;
 }

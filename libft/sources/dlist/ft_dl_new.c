@@ -1,41 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper_bonus.c                                :+:      :+:    :+:   */
+/*   ft_dl_new.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/25 11:51:33 by gbrunet          ###   ########.fr       */
+/*   Created: 2023/11/09 09:22:24 by gbrunet           #+#    #+#             */
+/*   Updated: 2023/12/13 16:25:12 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void	swap(int *a, int *b)
+t_dlist	*ft_dl_new(void *data)
 {
-	int	temp;
+	t_dlist	*list;
 
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-float	fpartofnb(float x)
-{
-	if (x > 0)
-		return (x - (int)x);
-	return (x - ((int)x + 1));
-}
-
-float	rfpartofnb(float x)
-{
-	return (1 - fpartofnb(x));
-}
-
-int	toggle(int i)
-{
-	if (i == 1)
-		return (0);
-	return (1);
+	list = malloc(sizeof(t_dlist));
+	if (!list)
+		return (NULL);
+	list->data = data;
+	list->next = NULL;
+	list->prev = NULL;
+	return (list);
 }

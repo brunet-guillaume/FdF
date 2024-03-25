@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/13 08:49:31 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/13 14:29:51 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/01/14 14:34:21 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 char	*add_buffer(char *p_line, char *buf)
 {
@@ -88,7 +88,12 @@ char	*save_line(char *p_line)
 	endl_pos = get_endl_pos(p_line);
 	if (endl_pos == -1)
 		return (clean_exit(p_line));
-	p_line_len = gnl_strlen(p_line);
+	p_line_len = ft_strlen(p_line);
+	if (p_line_len - endl_pos == 1)
+	{
+		free(p_line);
+		return (NULL);
+	}
 	n_p_line = malloc((p_line_len - endl_pos) * sizeof(char));
 	if (!n_p_line)
 		return (clean_exit(p_line));

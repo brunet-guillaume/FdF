@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_c.c                                          :+:      :+:    :+:   */
+/*   ft_bt_add_right.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <guill@umebrunet.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/12 10:13:43 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/12 18:19:12 by gbrunet          ###   ########.fr       */
+/*   Created: 2024/03/02 13:05:21 by gbrunet           #+#    #+#             */
+/*   Updated: 2024/03/02 13:05:31 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-size_t	print_c(t_opt opts, va_list *ap)
+t_btree	*ft_bt_add_right(t_btree *root, void *data)
 {
-	char	c;
-
-	c = (char)va_arg(*ap, int);
-	if (!opts.minus)
-		print_c_i(' ', opts.width - 1);
-	ft_putchar_fd(c, 1);
-	if (opts.minus)
-		print_c_i(' ', opts.width - 1);
-	return (max(1, opts.width));
+	if (!root)
+		return (NULL);
+	root->right = ft_bt_new(data);
+	return (root->right);
 }

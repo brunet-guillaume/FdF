@@ -6,18 +6,11 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/17 17:57:50 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/25 11:44:02 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
-
-int	min(int a, int b)
-{
-	if (a < b)
-		return (a);
-	return (b);
-}
 
 void	swap(int *a, int *b)
 {

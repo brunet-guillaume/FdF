@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 16:19:26 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/10 09:40:23 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/12/07 11:14:49 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*ft_strtrim(char const *s1, char const *set)
 	if (*set == 0)
 		return (ft_strdup(s1));
 	strlen = ft_strlen(s1) - 1;
-	while (is_in_set(s1[strlen], set))
+	while (strlen >= 0 && is_in_set(s1[strlen], set))
 		strlen--;
 	if (strlen == -1)
 		trimmed = empty_str();

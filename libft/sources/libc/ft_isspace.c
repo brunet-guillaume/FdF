@@ -1,41 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper_bonus.c                                :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/25 11:51:33 by gbrunet          ###   ########.fr       */
+/*   Created: 2024/01/16 10:06:16 by gbrunet           #+#    #+#             */
+/*   Updated: 2024/01/16 10:07:37 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void	swap(int *a, int *b)
+int	ft_isspace(char c)
 {
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-float	fpartofnb(float x)
-{
-	if (x > 0)
-		return (x - (int)x);
-	return (x - ((int)x + 1));
-}
-
-float	rfpartofnb(float x)
-{
-	return (1 - fpartofnb(x));
-}
-
-int	toggle(int i)
-{
-	if (i == 1)
-		return (0);
-	return (1);
+	if (c == ' ' || c == '\f' || c == '\n' || c == '\r'
+		|| c == '\t' || c == '\v')
+		return (1);
+	return (0);
 }

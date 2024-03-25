@@ -6,7 +6,7 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 19:25:47 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/20 09:07:06 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/03/25 11:44:32 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define FDF_H
 
 # include "../minilibx-linux/mlx.h"
-# include "../libft/libft.h"
+# include "libft.h"
 # include "fdf_struct.h"
 # include <math.h>
 # include <stdlib.h>
@@ -44,7 +44,6 @@ int			update(t_env *e);
 int			file_error(void);
 int			read_error(void);
 int			file_ext(char *f);
-int			min(int a, int b);
 int			draw_map(t_env *e);
 int			init_mlx(t_env *e);
 int			close_win(t_env *e);

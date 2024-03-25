@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	*join_str(char *p_line, char *buf)
 {
@@ -19,8 +19,8 @@ void	*join_str(char *p_line, char *buf)
 	int		b_len;
 	int		i;
 
-	p_len = gnl_strlen(p_line);
-	b_len = gnl_strlen(buf);
+	p_len = ft_strlen(p_line);
+	b_len = ft_strlen(buf);
 	n_line = malloc((p_len + b_len + 1) * sizeof(char));
 	if (!n_line)
 		return (NULL);

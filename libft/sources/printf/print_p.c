@@ -6,11 +6,11 @@
 /*   By: gbrunet <guill@umebrunet.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 10:13:43 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/12 18:20:14 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/29 13:44:22 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	print_p_hex(unsigned long nb)
 {
@@ -44,6 +44,17 @@ size_t	print_p(t_opt opts, va_list *ap)
 	size_t	len;
 
 	p = va_arg(*ap, void *);
+	if (p == 0)
+	{
+		len = 0;
+		while (opts.width-- - 5 > 0)
+		{
+			len++;
+			ft_putstr_fd(" ", 1);
+		}
+		ft_putstr_fd("(nil)", 1);
+		return (5 + len);
+	}
 	len = p_len((unsigned long)p);
 	if (!opts.minus)
 		print_c_i(' ', opts.width - len);

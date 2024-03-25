@@ -6,11 +6,11 @@
 /*   By: gbrunet <guill@umebrunet.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 10:02:18 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/12 17:10:59 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/29 16:17:03 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
 void	print_u_num(unsigned int nb)
 {
@@ -27,6 +27,8 @@ size_t	get_unsigned_int_size(t_opt opts, unsigned int u)
 {
 	size_t	len;
 
+	if (u == 0 && opts.dot == 0)
+		return (0 + opts.width);
 	len = max(ft_unsigned_intlen(u), opts.dot);
 	len = max(len, opts.width);
 	return (len);
@@ -36,6 +38,8 @@ size_t	calc_u_size(int u, t_opt opts)
 {
 	size_t	len;
 
+	if (u == 0 && opts.dot == 0 && opts.width != 1)
+		return (0);
 	len = 0;
 	if (opts.plus || opts.space)
 		len = 1;
@@ -51,12 +55,13 @@ size_t	print_u(t_opt opts, va_list *ap)
 
 	u = va_arg(*ap, unsigned int);
 	if (!opts.minus)
-		print_c_i(' ', opts.width - max(calc_u_size(u, opts), opts.dot));
+		print_c_i(' ', calc_u_space(u, opts));
 	if (opts.zero)
-		print_c_i('0', opts.width - ft_unsigned_intlen(u));
+		print_c_i('0', calc_u_zero(u, opts));
 	if (opts.dot != -1)
 		print_c_i('0', opts.dot - ft_unsigned_intlen(u));
-	print_u_num(u);
+	if (!(opts.dot == 0 && u == 0))
+		print_u_num(u);
 	if (opts.minus)
 		print_c_i(' ', opts.width - max(calc_u_size(u, opts), opts.dot));
 	return (get_unsigned_int_size(opts, u));

@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper_bonus.c                                :+:      :+:    :+:   */
+/*   ft_dl_del.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/15 20:01:34 by gbrunet           #+#    #+#             */
-/*   Updated: 2024/03/25 11:51:33 by gbrunet          ###   ########.fr       */
+/*   Created: 2023/11/09 10:06:05 by gbrunet           #+#    #+#             */
+/*   Updated: 2023/12/13 16:21:59 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fdf.h"
+#include "libft.h"
 
-void	swap(int *a, int *b)
+void	ft_dl_del(t_dlist *lst, void (*del)(void *))
 {
-	int	temp;
-
-	temp = *a;
-	*a = *b;
-	*b = temp;
-}
-
-float	fpartofnb(float x)
-{
-	if (x > 0)
-		return (x - (int)x);
-	return (x - ((int)x + 1));
-}
-
-float	rfpartofnb(float x)
-{
-	return (1 - fpartofnb(x));
-}
-
-int	toggle(int i)
-{
-	if (i == 1)
-		return (0);
-	return (1);
+	if (!lst || !del)
+		return ;
+	if (lst->prev && lst->next)
+	{
+		lst->prev->next = lst->next;
+		lst->next->prev = lst->prev;
+	}
+	else if (lst->prev)
+		lst->prev->next = NULL;
+	else if (lst->next)
+		lst->next->prev = NULL;
+	(*del)(lst->data);
+	free(lst);
+	lst = NULL;
 }

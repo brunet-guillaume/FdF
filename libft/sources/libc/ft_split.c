@@ -6,13 +6,11 @@
 /*   By: gbrunet <gbrunet@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 17:00:36 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/20 08:38:25 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/10 08:26:42 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdio.h>
 
 static int	parts_counter(char const *s, char c)
 {

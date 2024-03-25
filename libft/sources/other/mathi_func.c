@@ -1,63 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   helper.c                                           :+:      :+:    :+:   */
+/*   mathi_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <guill@umebrunet.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 10:08:56 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/12 18:24:14 by gbrunet          ###   ########.fr       */
+/*   Updated: 2024/02/22 15:45:20 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h"
+#include "libft.h"
 
-void	print_d_num(int nb)
+int	min(int a, int b)
 {
-	long	nbr;
-
-	nbr = nb;
-	if (nb < 0)
-		nbr = -nbr;
-	if (nbr >= 10)
-	{
-		print_d_num(nbr / 10);
-		print_d_num(nbr % 10);
-	}
-	if (nbr < 10)
-		ft_putchar_fd('0' + nbr, 1);
-}
-
-size_t	ft_unsigned_intlen(unsigned int u)
-{
-	size_t	len;
-
-	len = 0;
-	while (u / 10 != 0)
-	{
-		u /= 10;
-		len++;
-	}
-	return (len + 1);
-}
-
-size_t	ft_intlen(int d)
-{
-	size_t	len;
-
-	len = 0;
-	while (d / 10 != 0)
-	{
-		d /= 10;
-		len++;
-	}
-	return (len + 1);
-}
-
-void	print_c_i(char c, int i)
-{
-	while (i-- > 0)
-		ft_putchar_fd(c, 1);
+	if (a < b)
+		return (a);
+	return (b);
 }
 
 int	max(int a, int b)
@@ -65,4 +24,12 @@ int	max(int a, int b)
 	if (b > a)
 		return (b);
 	return (a);
+}
+
+int	clamp(int nb, int a, int b)
+{
+	if (a < b)
+		return (max(min(b, nb), a));
+	else
+		return (max(min(a, nb), b));
 }

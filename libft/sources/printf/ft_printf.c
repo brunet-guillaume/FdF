@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_printf_VERIFAVEC_printf(NULL).c                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gbrunet <guill@umebrunet.fr>               +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/11 19:46:19 by gbrunet           #+#    #+#             */
-/*   Updated: 2023/11/12 18:46:17 by gbrunet          ###   ########.fr       */
+/*   Updated: 2023/11/24 15:45:49 by gbrunet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft.h" 
+#include "libft.h"
 
 size_t	print_value(t_opt options, va_list *ap)
 {
@@ -74,7 +74,10 @@ int	ft_printf(const char *format, ...)
 	va_list	ap;
 	size_t	count;
 
+	if (format == NULL)
+		return (-1);
 	va_start(ap, format);
 	count = parser(format, &ap);
+	va_end(ap);
 	return (count);
 }
