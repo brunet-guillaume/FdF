@@ -44,7 +44,7 @@ In the bonus part, we need to :
 
 ### Compilation
 ```bash
-git clone https://gitlab.com/uotiug42/graphic-projects/fdf.git
+git clone https://gitlab.com/uotiug42/graphics/fdf.git
 cd fdf
 # mandatory part :
 make
